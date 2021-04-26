@@ -33,6 +33,15 @@ nav {
   position: relative;
   display: inline-block;
 
+  display: flex;
+  flex-direction: column;
+  li {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+  }
+
   .settings-btn {
     cursor: pointer;
     margin: auto;
@@ -61,16 +70,6 @@ nav {
 }
 .show {
   display: block;
-}
-.settings {
-  display: flex;
-  flex-direction: column;
-  li {
-    list-style: none;
-  }
-  a {
-    text-decoration: none;
-  }
 }
 main {
   max-width: 980px;

@@ -50,6 +50,13 @@ nav .logo {
 .settings {
   position: relative;
   display: inline-block;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
 }
 
 .settings .settings-btn {
@@ -83,16 +90,6 @@ nav .logo {
 
 .show {
   display: block;
-}
-
-.settings {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
 }
 
 .settings li {
