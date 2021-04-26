@@ -1,0 +1,24 @@
+#task-creation {
+  display: none;
+  position: fixed;
+  width: 90%;
+  max-width: 720px;
+  margin: auto;
+  background-color: white;
+  text-align: center;
+}
+
+#task-creation label {
+  display: block;
+  margin-bottom: 10px;
+}
+input[type="submit"] {
+  display: block;
+  margin: 10px auto;
+}
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}

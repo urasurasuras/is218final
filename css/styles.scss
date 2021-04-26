@@ -1,0 +1,83 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-color: antiquewhite;
+}
+/*===============================
+ * Navigation
+ *===============================*/
+header {
+  width: 100%;
+  background-color: white;
+}
+nav {
+  max-width: 980px;
+  padding: 10px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+.task-count {
+  justify-content: space-around;
+}
+.settings {
+  position: relative;
+  display: inline-block;
+
+  .settings-btn {
+    cursor: pointer;
+    margin: auto;
+    font-size: 18px;
+    font-weight: bold;
+    :after {
+      font-family: "Font Awesome 5 Free";
+      font-weight: 900;
+      content: "\f0d7";
+    }
+  }
+}
+.settings-content {
+  top: 50px;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+
+  a {
+    display: block;
+    padding: 12px 16px;
+  }
+}
+.show {
+  display: block;
+}
+.settings {
+  display: flex;
+  flex-direction: column;
+  li {
+    list-style: none;
+  }
+  a {
+    text-decoration: none;
+  }
+}
+main {
+  max-width: 980px;
+  width: 90%;
+  background-color: white;
+
+  margin: 2% auto 0 auto;
+}
+
+@import "todolist";

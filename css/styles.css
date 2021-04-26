@@ -1,0 +1,139 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  background-color: antiquewhite;
+}
+
+/*===============================
+ * Navigation
+ *===============================*/
+header {
+  width: 100%;
+  background-color: white;
+}
+
+nav {
+  max-width: 980px;
+  padding: 10px;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+nav .logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.task-count {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.settings {
+  position: relative;
+  display: inline-block;
+}
+
+.settings .settings-btn {
+  cursor: pointer;
+  margin: auto;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.settings .settings-btn :after {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  content: "\f0d7";
+}
+
+.settings-content {
+  top: 50px;
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  -webkit-box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.settings-content a {
+  display: block;
+  padding: 12px 16px;
+}
+
+.show {
+  display: block;
+}
+
+.settings {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.settings li {
+  list-style: none;
+}
+
+.settings a {
+  text-decoration: none;
+}
+
+main {
+  max-width: 980px;
+  width: 90%;
+  background-color: white;
+  margin: 2% auto 0 auto;
+}
+
+#task-creation {
+  display: none;
+  position: fixed;
+  width: 90%;
+  max-width: 720px;
+  margin: auto;
+  background-color: white;
+  text-align: center;
+}
+
+#task-creation label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+input[type="submit"] {
+  display: block;
+  margin: 10px auto;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+/*# sourceMappingURL=styles.css.map */
