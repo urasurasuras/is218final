@@ -3,22 +3,30 @@
 require("connection.php");
 require("user.php");
 
-$conn = new SqlConnection();
-$conn->connect();
-$loggedIn = $conn->doLogin($_POST["username"], $_POST["password"]);
+session_start();
+
+if (isset($_SESSION['loggedIn'])){
+	header("Location: home.php");
+}
+else{
+
+    $conn = new SqlConnection();
+    $conn->connect();
+    $loggedIn = $conn->doLogin($_POST["username"], $_POST["password"]);
+
+    if (!empty($loggedIn)){
+
+        echo "Logged in as: ";
+        $_SESSION['loggedIn'] = $loggedIn;
+
+        header("Location: home.php");
+    }
+    else {
+        echo "Could not lotign";
+    }
+}
 // $userFound = $conn->findUserName($_GET["username"]);
 // $emailFound = $conn->findEmail($_GET["email"]);
-
-
-if(!empty($_POST["remember"])) {
-	setcookie ("username",$_POST["username"],time()+ 3600);
-	setcookie ("password",$_POST["password"],time()+ 3600);
-	echo "Cookies Set Successfuly";
-} else {
-	setcookie("username","");
-	setcookie("password","");
-	echo "Cookies Not Set";
-}
 
 ?>
 

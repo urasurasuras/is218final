@@ -3,7 +3,15 @@
     -logout
     -tasks stuff
 -->
-<?php include_once 'header.php' ?>
+
+<?php 
+    include_once ('header.php') ;
+
+    if (!isset($_SESSION['loggedIn'])){
+        header("Location: login.html");
+    }
+
+?>
 
 <div class="task-count">
     <span></span>
