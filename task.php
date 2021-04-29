@@ -19,7 +19,7 @@
             <input type="text" name="" id="taskName" placeholder="Name" required>
 
             <Label for="taskDesc">Description: </Label>
-            <textarea name="message" rows="10" cols="30">The cat was playing in the garden.</textarea>
+            <textarea name="message" rows="10" cols="30" placeholder="Enter Description of your Task..."></textarea>
 
             <label for="dueDate">Due Date:</label>
             <input type="date" name="" id="dueDate">
