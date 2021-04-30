@@ -7,7 +7,7 @@
 <?php 
     include_once ('header.php') ;
 
-    if (!isset($_SESSION['loggedIn'])){
+    if (!isset($_SESSION['loginInfo'])){
         header("Location: login.html");
     }
 
