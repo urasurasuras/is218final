@@ -5,37 +5,72 @@
     session_start();
     if(isset($_POST) && isset($_SESSION))
     {
-        print_r($_POST);
-        echo "<br>";echo "<br>";echo "<br>";
+        // echo "POST ARRAY:";
+        // print_r($_POST);
+        // echo "<br>";echo "<br>";echo "<br>";
         $loginInfo = $_SESSION['loginInfo'][0];
+        // echo "SESSION ARRAY:";
         // print_r($loginInfo);
         // echo $loginInfo['username'];
-        echo "hello ".$_POST["username"];
-        echo "<br>";echo "<br>";echo "<br>";
+        // echo "hello ".$_POST["username"];
+        // echo "<br>";echo "<br>";echo "<br>";
 
-
+        // Try login with current password
         $conn = new SqlConnection();
         $conn->connect();
         $loginVerified = $conn->doLogin($loginInfo['username'], $_POST["current_password"]);
 
-        if (!empty($loginVerified)){
+        if (empty($loginVerified)){// wrong password
 
-            $sql = "UPDATE `users` 
-                    SET 
-                    `password`='".$_POST['new_password']."'
-                    
-                    WHERE `username`='".$loginInfo['username']."'";
-                
-            echo $sql;
-            echo "<br>";echo "<br>";echo "<br>";
-            $conn->runQuery($sql);
+            $_SESSION['message'] = "Wrong password";
+
+            echo "Could not lotign";            
         }
         else {
 
-            echo "Could not lotign";
-        }
-                    //TODO: UPDATE SESSION
+            // Try to run update query
+            $result = $conn->changePassword($loginInfo['username'], $_POST['new_password']);
 
+            // echo "RESULT ARRAY:";
+            // print_r($result);   
+            // $_SESSION['username'] = $result
+
+            if (!empty($result)){ // Null result from runQuery, assume duplicate username
+
+                echo "RESULT ARRAY: ";
+                print_r($result);
+                // $_SESSION['message'] = "Username ".$_POST['new_username']." taken";
+                // $_SESSION['message'] = "Username ".$_POST['new_username']." taken";
+
+                // print_r($_SESSION);
+                // echo $_SESSION['message'];
+                // echo "set";
+            }
+            else {// successful name change
+
+                // Get login with new credentials
+                $conn = new SqlConnection();
+                $conn->connect();
+                $loginInfo = $conn->doLogin($loginInfo["username"], $_POST["new_password"]);
+
+                // Reset session with new login
+                if (!empty($loginInfo)){
+                    session_destroy();
+                    session_start();
+                    $_SESSION['loginInfo'] = $loginInfo;
+                    $loginInfo = $_SESSION['loginInfo'][0];
+                    // echo "Changed username to: ".$loginInfo['username'];
+                    // $_SESSION['message'] = "Changed password to: ".$loginInfo['password'];// DON'T DO THIS
+                    $_SESSION['message'] = "Password changed successfully!";
+                }
+
+            }
+                
+        }  
+        echo "SESSION ARRAY:";
+        print_r($loginInfo);
+        echo $_SESSION['message']; // we're sending this back to the previous page
+        header("Location: profile.php");  
     } 
 ?>
 

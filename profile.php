@@ -5,17 +5,18 @@
 	print_r($loginInfo);
 ?>
 
+<div class="row">
 <!-- Change username form -->
 <form action="changeUsername.php" method="POST">
 <div class="column">
 
-	<label for="new_username"><b>Username</b></label>
+	<label for="new_username"><b>New Username</b></label>
 	<input type="text" placeholder="Enter New Username" name="new_username" required>
 
 	<br>
 	
 	<label for="current_password"><b>Password</b></label>
-	<input type="password" placeholder="Enter Password" name="current_password" required>	
+	<input type="password" placeholder="Enter password to confirm" name="current_password" required>	
 
 	<br>
 	
@@ -26,19 +27,14 @@
 <!-- Change password form -->
 <form action="changePassword.php" method="POST">
 	<div class="column">
-
-	<label for="username"><b>Username</b></label>
-	<input type="text" placeholder="Enter Username" name="username" required>
-
-	<br>
 	
-	<label for="current_password"><b>Current Password</b></label>
-	<input type="password" placeholder="Enter Password" name="current_password" required>
+	<label for="new_password"><b>New Password</b></label>
+	<input type="password" placeholder="Enter new password" name="new_password" required>
 
 	<br>
 
-	<label for="new_password"><b>New Password</b></label>
-	<input type="password" placeholder="Enter Password" name="new_password" required>
+	<label for="current_password"><b>Current Password</b></label>
+	<input type="password" placeholder="Enter current password to confirm" name="current_password" required>
 
 	<br>
 	
@@ -46,10 +42,11 @@
 	</div>
 
 </form>
+</div>
 
 
 	<?php
-		// session_start();
+		// this is where we print whatever messaage we have that we probably got from changing credentials
 		if (isset($_SESSION['message'])){
 			echo $_SESSION['message'];
 		}		

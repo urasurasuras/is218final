@@ -115,6 +115,18 @@ class SqlConnection{
 
 	}
 
+	function changePassword($username, $password){
+		$sql = "UPDATE `users` 
+				SET 
+				`password`='".$password."'
+				
+				WHERE `username`='".$username."'";
+
+		$results = $this->runQuery($sql);
+
+		return $results;
+	}
+
 	function http_error($message) 
 	{
 		header("Content-type: text/plain");
