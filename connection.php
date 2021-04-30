@@ -36,12 +36,13 @@ class SqlConnection{
 	function runQuery($query) {
 		try {
 			$q = $this->conn->prepare($query);
-			$q->execute();
-			$results = $q->fetchAll();
+			$success = $q->execute();
+			$results = $q->fetchAll(PDO::FETCH_ASSOC);
 			$q->closeCursor();
 			return $results;	
 		} catch (PDOException $e) {
-			$this->http_error("500 Internal Server Error\n\n"."There was a SQL error:\n\n" . $e->getMessage());
+			$results = $this->http_error("500 Internal Server Error\n\n"."There was a SQL error:\n\n" . $e->getMessage());
+			return $results;
 		}	  
 	}
 	function doLogin($username, $password) 
@@ -103,10 +104,23 @@ class SqlConnection{
 		return $results;
 	}
 
+	function changeUsername($from, $to){
+		$sql = "UPDATE `users` 
+                    SET `username`='".$to."'
+                    WHERE `username`='".$from."'";
+
+		$results = $this->runQuery($sql);
+
+		return $results;
+
+	}
+
 	function http_error($message) 
 	{
 		header("Content-type: text/plain");
-		die($message);
+		// die($message); // Don't die here so we can ACTUALLY do something with null sql results
+		// echo $message."\n\n";
+		return $message;
 	}
 }
 ?>

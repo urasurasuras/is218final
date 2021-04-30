@@ -5,24 +5,28 @@ require("user.php");
 
 session_start();
 
-if (isset($_SESSION['loggedIn'])){
+if (isset($_SESSION['loginInfo'])){
+    echo "sadljbasjhd";
 	header("Location: home.php");
 }
 else{
 
     $conn = new SqlConnection();
     $conn->connect();
-    $loggedIn = $conn->doLogin($_POST["username"], $_POST["password"]);
+    $loginInfo = $conn->doLogin($_POST["username"], $_POST["password"]);
+    print_r($loginInfo);
 
-    if (!empty($loggedIn)){
+    if (!empty($loginInfo)){
 
         echo "Logged in as: ";
-        $_SESSION['loggedIn'] = $loggedIn;
+        $_SESSION['loginInfo'] = $loginInfo;
+        // $_SESSION['loggedIn'] = $loggedIn;
 
+        // if we logged in, proceed to home
         header("Location: home.php");
     }
     else {
-        echo "Could not lotign";
+        echo "Could not login, try again";
     }
 }
 // $userFound = $conn->findUserName($_GET["username"]);
@@ -30,4 +34,4 @@ else{
 
 ?>
 
-<p><a href="login.php"> Go to Login Page </a> </p>
+<p><a href="login.html"> Go back to Login Page </a> </p> <!-- kinda wanna do this in a way that it goes back to the login page but says the error -->
