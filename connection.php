@@ -127,6 +127,16 @@ class SqlConnection{
 		return $results;
 	}
 
+	function registerUser($user){
+		$sql = "INSERT INTO `users`
+				(`username`, `email`, `password`, `LastName`, `FirstName`) 
+				VALUES ('$user->username', '$user->email','$user->password', '$user->lastName', '$user->firstName')";
+
+		$results = $this->runQuery($sql);
+
+		return $results;
+	}
+
 	function http_error($message) 
 	{
 		header("Content-type: text/plain");

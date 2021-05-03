@@ -15,12 +15,16 @@ if (isset($_GET["username"]) &&
 
     $user = new User($_GET["username"], $_GET["email"], $_GET["password"], $_GET["firstName"], $_GET["lastName"]);
 
-	$sql = "INSERT INTO `users`(`username`, `email`, `password`, `LastName`, `FirstName`) VALUES ('$user->username', '$user->email','$user->password', '$user->lastName', '$user->firstName')";
-    echo $sql;
-	$conn->runQuery($sql);
-	// $results = $conn->runQuery($sql);
+	$results = $conn->registerUser($user);
+	if (!empty($result)){ // Null result from runQuery, assume duplicate username
 
-	// print_r( $results );
+		echo "RESULT ARRAY: ";
+		print_r($result);
+
+	}
+	else {// successful name change
+		echo "daskjgdhjuasd";
+	}
 }
 
 if(!empty($_POST["remember"])) {
