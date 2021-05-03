@@ -1,5 +1,5 @@
 <?php
-    session_start();
+session_start();
 ?>
 
 <!DOCTYPE html>
@@ -17,15 +17,15 @@
 <body>
     <header>
         <nav class="navbar">
-            <a class"logo" href="#"><img src="#" class="logo-img" alt="website logo">
+            <a class"logo" href="home.php"><img src="#" class="logo-img" alt="website logo">
                 <h1>TODO List</h1>
             </a>
             <div class="settings">
 
                 <?php
-                    $loginInfo = $_SESSION['loginInfo'];
-                    // Really unga bunga way to print the username into this but keeps the dropdown functionality
-                    echo "<p onclick='toggleNav()' class='settings-btn'>".$loginInfo[0]['username']."</p>";
+                $loginInfo = $_SESSION['loginInfo'];
+                // Really unga bunga way to print the username into this but keeps the dropdown functionality
+                echo "<p onclick='toggleNav()' class='settings-btn'>" . $loginInfo[0]['username'] . "</p>";
                 ?>
                 <ul id="settings-dropdown" class="settings-content">
                     <li class="nav-item"><a href="profile.php">Edit Profile</a></li>
