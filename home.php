@@ -29,6 +29,7 @@
     <hr>
     <div class="content"></div>
     <?php @include_once 'task.php'; ?>
+    
 </main>
 
 <script src="js/scripts.js"></script>

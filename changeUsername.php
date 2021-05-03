@@ -24,7 +24,7 @@
 
             $_SESSION['message'] = "Wrong password";
 
-            echo "Could not lotign";            
+            echo "Could not login";            
         }
         else {
 
