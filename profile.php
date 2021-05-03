@@ -6,7 +6,7 @@ $loginInfo = $_SESSION['loginInfo'][0];
 
 ?>
 
-<main>
+<main id="profile">
 	<div class="tab">
 		<button class="tablinks" onclick="openTab(event, 'change_username');">Change Username</button>
 		<button class="tablinks" onclick="openTab(event, 'change_password');">Change Password</button>
@@ -20,12 +20,10 @@ $loginInfo = $_SESSION['loginInfo'][0];
 			<label for="new_username"><b>New Username</b></label>
 			<input type="text" placeholder="Enter New Username" name="new_username" required>
 
-			<br>
 
 			<label for="current_password"><b>Password</b></label>
 			<input type="password" placeholder="Enter password to confirm" name="current_password" required>
 
-			<br>
 
 			<button type="submit">Change Username</button>
 
@@ -40,12 +38,10 @@ $loginInfo = $_SESSION['loginInfo'][0];
 			<label for="new_password"><b>New Password</b></label>
 			<input type="password" placeholder="Enter new password" name="new_password" required>
 
-			<br>
 
 			<label for="current_password"><b>Current Password</b></label>
 			<input type="password" placeholder="Enter current password to confirm" name="current_password" required>
 
-			<br>
 
 			<button type="submit">Change Password</button>
 

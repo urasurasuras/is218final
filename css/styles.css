@@ -138,8 +138,37 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+#profile {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-align: center;
+}
+
+#profile label {
+  display: block;
+}
+
+#profile button[type="submit"] {
+  display: block;
+  margin: 10px auto;
+  padding: 5px;
+}
+
+#profile input[type="text"],
+#profile input[type="password"] {
+  width: 50%;
+  margin: 10px;
+}
+
 .tab {
-  float: left;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   border: 1px solid #ccc;
   background-color: #f1f1f1;
   width: 30%;
@@ -173,7 +202,6 @@ input[type="submit"] {
 
 /* Style the tab content */
 .tabcontent {
-  float: left;
   padding: 0px 12px;
   border: 1px solid #ccc;
   width: 70%;

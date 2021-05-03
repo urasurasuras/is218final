@@ -136,7 +136,15 @@ class SqlConnection{
 
 		return $results;
 	}
+	function createTask($task){
+		$sql = "INSERT into `tasks`
+				(`username`, `title`, `description`, `due`, `urgency`, `completion`)
+				VALUES ('$task->username', '$task->title', '$task->description', '$task->due', '$task->urgency', '$task->completion')";
 
+		$results = $this->runQuery($sql);
+
+		return $results;
+	}
 	function http_error($message) 
 	{
 		header("Content-type: text/plain");

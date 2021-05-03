@@ -1,23 +1,25 @@
-<div id="task-creation">
-    <h2>Create a new Task</h2>
-    <span class="close">&times;</span>
-    <form action="taskInfo.php" method="post">
-        <label for="taskName">Name: </label>
-        <input type="text" name="taskName" id="taskName" placeholder="Name" required>
+<?php
+class Task {
+    public $id;
+    public $username;
+    public $title;
+    public $description;
+    public $due;
+    public $urgency;
+    public $completion;
 
-        <Label for="taskDesc">Description: </Label>
-        <textarea name="message" rows="10" cols="30" placeholder="Enter Description of your Task..."></textarea>
+   
+    function __construct($username, $title, $description, $due, $urgency,  $id = NULL, $completion = false) {
+        $this->username = $username;
+        $this->id = $id;
+        $this->title = $title;
+        $this->description = $description;
+        $this->due = $due;
+        $this->urgency = $urgency;
+        $this->completion = $completion;
+    }
 
-        <label for="dueDate">Due Date:</label>
-        <input type="date" name="dueDate" id="dueDate">
+    
+}
 
-        <label for="taskUrgency">Task Urgency: </label>
-        <select name="taskUrgency" id="taskUrgency" required>
-            <option value="Normal">Normal</option>
-            <option value="Important">Important</option>
-            <option value="Very Important">Very Important</option>
-        </select>
-
-        <input type="submit" value="Add Task">
-    </form>
-</div>
+?>
