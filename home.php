@@ -4,12 +4,12 @@
     -tasks stuff
 -->
 
-<?php 
-    include_once ('header.php') ;
+<?php
+include_once('header.php');
 
-    if (!isset($_SESSION['loginInfo'])){
-        header("Location: login.html");
-    }
+if (!isset($_SESSION['loginInfo'])) {
+    header("Location: login.html");
+}
 
 ?>
 
@@ -28,8 +28,14 @@
     </div>
     <hr>
     <div class="content"></div>
-    <?php @include_once 'task.php'; ?>
-    
+    <?php @include_once 'taskContent.php'; ?>
+    <table>
+        <tbody>
+            <th>To-do Tasks</th>
+            <th>Completed Tasks</th>
+
+        </tbody>
+    </table>
 </main>
 
 <script src="js/scripts.js"></script>

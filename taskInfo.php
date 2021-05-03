@@ -1,34 +1,31 @@
 <?php
 
 require("connection.php");
-require("user.php");
+require("task.php");
+session_start();
+$loginInfo = $_SESSION['loginInfo'][0];
 
-$task_name = $_POST['taskName'];
-$text_box = $_POST['message'];
-$due_date = $_POST['dueDate'];
-$urgency = $_POST['taskUrgency'];
-
-
+$title = $_POST['title'];
+$description = $_POST['description'];
+$due = $_POST['due'];
+$urgency = $_POST['urgency'];
 
 $conn = new SqlConnection();
 $conn->connect();
 
+if (isset($_POST)) {
 
-try {
-    $sql = "INSERT into tasks($task_name,$text_box,$due_date,$urgency) VALUES (:task_name,:text_box,:due_date,:urgency)";
+    $task = new Task($loginInfo['username'], $title, $description, $due, $urgency);
 
-    $stmt = $conn->conn->prepare($sql);
+    $results = $conn->createTask($task);
+    if (!empty($result)) { // Null result from runQuery, assume duplicate username
 
-    // Bind parameters to statement
-    $stmt->bindParam(':task_name', $_REQUEST['taskName']);
-    $stmt->bindParam(':text_box', $_REQUEST['message']);
-    $stmt->bindParam(':due_date', $_REQUEST['dueDate']);
-    $stmt->bindParam(':urgency', $_REQUEST['taskUrgency']);
-
-    // Execute the prepared statement
-    $stmt->execute();
-} catch (PDOException $e) {
-    die("ERROR: Could not able to execute $sql. " . $e->getMessage());
+        echo "RESULT ARRAY: ";
+        print_r($result);
+        echo "Couldn't create Account.";
+    } else { // successful name change
+        echo "Task for " . $loginInfo['username'] . " created successfully!";
+    }
 }
 
 // Close connection

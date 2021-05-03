@@ -19,5 +19,3 @@ class User {
         echo "<tr><td>".$this->username."</td><td>".$this->email."</td><td>".$this->firstName."</td><td>".$this->lastName."</td></tr>";
     }
 }
-
-?>
