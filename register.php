@@ -5,38 +5,38 @@ require("user.php");
 
 $conn = new SqlConnection();
 $conn->connect();
+print_r($_POST);
+if (
+	isset($_POST["username"]) &&
+	isset($_POST["password"]) &&
+	isset($_POST["firstName"]) &&
+	isset($_POST["lastName"]) &&
+	isset($_POST["email"])
+) {
 
-if (isset($_GET["username"]) && 
-    isset($_GET["password"]) &&
-    isset($_GET["firstName"]) &&
-    isset($_GET["lastName"]) &&
-    isset($_GET["email"]) 
-    ){
-
-    $user = new User($_GET["username"], $_GET["email"], $_GET["password"], $_GET["firstName"], $_GET["lastName"]);
+	$user = new User($_POST["username"], $_POST["email"], $_POST["password"], $_POST["firstName"], $_POST["lastName"]);
 
 	$results = $conn->registerUser($user);
-	if (!empty($result)){ // Null result from runQuery, assume duplicate username
+	if (!empty($result)) { // Null result from runQuery, assume duplicate username
 
 		echo "RESULT ARRAY: ";
 		print_r($result);
-
-	}
-	else {// successful name change
-		echo "daskjgdhjuasd";
+		echo "Couldn't create Account.";
+	} else { // successful name change
+		echo "Account " . $_POST["username"] . " created successfully!";
 	}
 }
 
-if(!empty($_POST["remember"])) {
-	setcookie ("username",$_POST["username"],time()+ 3600);
-	setcookie ("password",$_POST["password"],time()+ 3600);
+if (!empty($_POST["remember"])) {
+	setcookie("username", $_POST["username"], time() + 3600);
+	setcookie("password", $_POST["password"], time() + 3600);
 	echo "Cookies Set Successfuly";
 } else {
-	setcookie("username","");
-	setcookie("password","");
+	setcookie("username", "");
+	setcookie("password", "");
 	echo "Cookies Not Set";
 }
 
 ?>
 
-<p><a href="login.php"> Go to Login Page </a> </p>
+<p><a href="login.html"> Go to Login Page </a> </p>
