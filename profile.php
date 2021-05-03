@@ -1,3 +1,8 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+</head>
 <?php
 	// print current login data 
 	session_start();
@@ -56,7 +61,8 @@
 <!-- Just unga bunga yote this in here to make the 2 forms stand next to each other -->
 <!-- https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_two_columns -->
 <style>
-	* {
+
+* {
 	  box-sizing: border-box;
 	}
 	
@@ -74,4 +80,4 @@
 	  display: table;
 	  clear: both;
 	}
-	</style>
+</style>
