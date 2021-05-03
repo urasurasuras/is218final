@@ -8,7 +8,7 @@
         // echo "POST ARRAY:";
         // print_r($_POST);
         // echo "<br>";echo "<br>";echo "<br>";
-        // $loginInfo = $_SESSION['loginInfo'][0];
+        $loginInfo = $_SESSION['loginInfo'][0];
         // echo "SESSION ARRAY:";
         // print_r($loginInfo);
         // echo $loginInfo['username'];
