@@ -1,8 +1,18 @@
-<div id="task-creation">
-    <h2>Create a new Task</h2>
-    <span class="create-close">&times;</span>
-    <form action="taskInfo.php" method="post">
+<div id="task-change">
+    <h2>Edit an Existing Task</h2>
+    <span class="edit-close">&times;</span>
+    <form action="editTaskInfo.php" method="post">
+        <label for="displayID">Available Tasks: </label>
+        <select name="displayID" id="displayID">
+            <?php if (count($taskIDs) > 0) {
 
+                foreach ($results as $option) {
+                    echo "<option value=''>" . $option["ID"] . "<\option>";
+                }
+            } else {
+                echo '0 results';
+            } ?>
+        </select>
         <label for="title">Name: </label>
         <input type="text" name="title" id="title" placeholder="Name" required>
 
@@ -19,6 +29,6 @@
             <option value="Very Important">Very Important</option>
         </select>
 
-        <input type="submit" value="Add Task">
+        <input type="submit" value="Edit Task">
     </form>
 </div>

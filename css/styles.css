@@ -110,7 +110,8 @@ main {
   margin: 2% auto 0 auto;
 }
 
-#task-creation {
+#task-creation,
+#task-change {
   display: none;
   position: fixed;
   width: 90%;
@@ -120,7 +121,8 @@ main {
   text-align: center;
 }
 
-#task-creation label {
+#task-creation label,
+#task-change label {
   display: block;
   margin-bottom: 10px;
 }
@@ -131,6 +133,9 @@ input[type="submit"] {
 }
 
 .close {
+  position: absolute;
+  top: 0;
+  right: 0;
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -138,7 +143,7 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-#add-task {
+#task_btn {
   padding: 5px;
 }
 

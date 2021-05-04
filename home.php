@@ -21,6 +21,9 @@ $incompleteTasks = $conn->runQuery($sql);
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
 $completeTasks = $conn->runQuery($sql);
+
+$sql= "SELECT `ID` FROM `tasks`";
+$taskIDs=$conn->runQuery($sql);
 ?>
 
 <div class="task-count">
@@ -47,7 +50,10 @@ $completeTasks = $conn->runQuery($sql);
     <h2>My Tasks</h2>
     <hr>
     <div class="controls">
-        <button id="add-task">Add Task</button>
+        <div class="buttons">
+            <button id="add-task" class="task_btn">Add Task</button>
+            <button id="edit-task" class="task_btn">Edit Task</button>
+        </div>
         <div class="filter_by">
             <label for="sort_by">Sort by: </label>
             <select name="sort_by" id="sort_by">
@@ -58,6 +64,7 @@ $completeTasks = $conn->runQuery($sql);
         </div>
     </div>
     <?php @include_once 'taskContent.php'; ?>
+    <?php @include_once 'editTaskContent.php'; ?>
 
     <?php
 
@@ -97,7 +104,7 @@ $completeTasks = $conn->runQuery($sql);
         echo "<td>" . $row['ID'] . "</td>";
         echo "<td>" . $row['title'] . "</td>";
         echo "<td>" . $row['description'] . "</td>";
-        echo "<td>" . $due . "<br>(" . $diff->d . "days, " . $diff->h . "hours.)</td>";
+        echo "<td>" . $due . "<br>Due in " . $diff->d . " days, and " . $diff->h . " hours</td>";
         echo "<td>" . $row['urgency'] . "</td>";
 
         echo '<td><button class="btn" value="btnDeleteTask" name="btnDeleteTask"><i class="fa fa-trash"></i></button></td>';
@@ -107,9 +114,9 @@ $completeTasks = $conn->runQuery($sql);
     }
 
     // Show completed tasks
-    echo "<table border='4' class='stats' cellspacing='0'>";
+    echo "<table class='stats' cellspacing='0'>";
     echo "<tr>
-        <td class='hed' colspan='8'>Completed Tasks</td>
+        <td class='head' colspan='8'>Completed Tasks</td>
           </tr>
         <tr>
 
@@ -142,7 +149,7 @@ $completeTasks = $conn->runQuery($sql);
         echo "<td>" . $row['ID'] . "</td>";
         echo "<td>" . $row['title'] . "</td>";
         echo "<td>" . $row['description'] . "</td>";
-        echo "<td>" . $due . "<br>(" . $diff->d . "days, " . $diff->h . "hours.)</td>";
+        echo "<td>" . $due . "<br>Due in " . $diff->d . " days, and " . $diff->h . " hours</td>";
         echo "<td>" . $row['urgency'] . "</td>";
         echo '<td><button class="btn" value="btnDeleteTask" name="btnDeleteTask"><i class="fa fa-trash"></i></button></td>';
 

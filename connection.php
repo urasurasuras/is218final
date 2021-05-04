@@ -148,6 +148,15 @@ class SqlConnection{
 
 		return $results;
 	}
+	function editTask($task){
+		$sql = "UPDATE `tasks`
+				SET `title`=$task->title,`description`=$task->description,`due`=$task->due,`urgency`=$task->urgency,`completion` $task->completion
+				WHERE `username`=$task->username AND `ID`=$task->id";
+
+		$results = $this->runQuery($sql);
+
+		return $results;
+	}
 	function http_error($message) 
 	{
 		header("Content-type: text/plain");
@@ -156,4 +165,3 @@ class SqlConnection{
 		return $message;
 	}
 }
-?>

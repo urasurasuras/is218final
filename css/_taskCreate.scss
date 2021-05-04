@@ -1,6 +1,7 @@
-#task-creation {
+#task-creation,
+#task-change {
   display: none;
-  position: fixed;
+  position: relative
   width: 90%;
   max-width: 720px;
   margin: auto;
@@ -8,7 +9,8 @@
   text-align: center;
 }
 
-#task-creation label {
+#task-creation label,
+#task-change label {
   display: block;
   margin-bottom: 10px;
 }
@@ -17,6 +19,9 @@ input[type="submit"] {
   margin: 10px auto;
 }
 .close {
+  position: absolute;
+  top: 0;
+  right: 0;
   color: #aaa;
   float: right;
   font-size: 28px;

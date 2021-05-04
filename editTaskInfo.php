@@ -17,7 +17,7 @@ if (isset($_POST)) {
 
     $task = new Task($loginInfo['username'], $title, $description, $due, $urgency);
 
-    $results = $conn->createTask($task);
+    $results = $conn->editTask($task);
     if (!empty($result)) { // Null result from runQuery, assume duplicate username
 
         echo "RESULT ARRAY: ";

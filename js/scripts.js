@@ -17,6 +17,9 @@ function toggleNav() {
       }
     }
   }
+  /*===================================================
+   *Create Task 
+   *===================================================*/
   // Get the modal
 var modal = document.getElementById("task-creation");
 
@@ -24,7 +27,7 @@ var modal = document.getElementById("task-creation");
 var btn = document.getElementById("add-task");
 
 // Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
+var span = document.getElementsByClassName("create-close")[0];
 
 // When the user clicks on the button, open the modal
 btn.onclick = function() {
@@ -42,6 +45,34 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+ /*===================================================
+   *Edit Task 
+   *===================================================*/
+  // Get the modal
+  var modal = document.getElementById("task-change");
+
+  // Get the button that opens the modal
+  var btn = document.getElementById("edit-task");
+  
+  // Get the <span> element that closes the modal
+  var span = document.getElementsByClassName("edit-close")[0];
+  
+  // When the user clicks on the button, open the modal
+  btn.onclick = function() {
+    modal.style.display = "block";
+  }
+  
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  }
+  
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
 /*==========================================
  * Code for Tabs
  *==========================================*/
