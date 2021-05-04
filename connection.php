@@ -38,7 +38,9 @@ class SqlConnection{
 			$q = $this->conn->prepare($query);
 			$success = $q->execute();
 			$results = $q->fetchAll(PDO::FETCH_ASSOC);
+
 			$q->closeCursor();
+			// print_r($results);
 			
 			return $results;	
 		} catch (PDOException $e) {

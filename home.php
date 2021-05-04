@@ -15,14 +15,32 @@
     $conn = new SqlConnection();
     $conn->connect();
     
+    // Show incomplete tasks
+    $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
+    $incompleteTasks = $conn->runQuery($sql);
 
+    $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
+    $completeTasks = $conn->runQuery($sql);
 ?>
 
 <div class="task-count">
-    <span></span>
-    <p>Completed:</p></span>
-    <span></span>
-    <p>Incomplete:</p></span>
+    <p>NOTE: Complete, incomplete, and delete task buttons are buggy so click them more than once</p>
+
+    <p>Incomplete:</p>
+    
+    <span>
+    <?php 
+        echo count($incompleteTasks);
+    ?>
+
+    </span>
+    <span>
+        <p>Completed:</p>
+        <?php 
+            echo count($completeTasks);
+        ?>
+    </span>
+
 </div>
 
 <main>
@@ -38,8 +56,8 @@
     <?php 
 
         // Show incomplete tasks
-        $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
-        $results = $conn->runQuery($sql);
+        // $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
+        // $results = $conn->runQuery($sql);
 
         echo "<table border='4' class='stats' cellspacing='0'>";
         echo "<tr>
@@ -57,7 +75,8 @@
         <th></th>
 
         </tr>";
-        foreach ($results as $row) {
+        foreach ($incompleteTasks as $row) {
+
             echo "<tr>";
                 echo "<form method='post'>";
                     echo '<td><button class="btn" value="btnCompleteTask" name="btnCompleteTask"><i class="fas fa-check-square"></i></button></td>';
@@ -82,9 +101,6 @@
         }
 
         // Show completed tasks
-        $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
-        $results = $conn->runQuery($sql);
-
         echo "<table border='4' class='stats' cellspacing='0'>";
         echo "<tr>
         <td class='hed' colspan='8'>Completed Tasks</td>
@@ -102,7 +118,8 @@
         <th></th>
 
         </tr>";
-        foreach ($results as $row) {
+        foreach ($completeTasks as $row) {
+
             echo "<tr>";
 
                 echo "<form method='post'>";
