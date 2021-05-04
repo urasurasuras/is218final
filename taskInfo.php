@@ -23,8 +23,9 @@ if (isset($_POST)) {
         echo "RESULT ARRAY: ";
         print_r($result);
         echo "Couldn't create Account.";
-    } else { // successful name change
+    } else { // successful Task addition
         echo "Task for " . $loginInfo['username'] . " created successfully!";
+        header("Location: home.php");
     }
 }
 

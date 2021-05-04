@@ -23,10 +23,14 @@ session_start();
             <div class="settings">
 
                 <?php
-                $loginInfo = $_SESSION['loginInfo'];
-                // Really unga bunga way to print the username into this but keeps the dropdown functionality
-                echo "<p onclick='toggleNav()' class='settings-btn'>" . $loginInfo[0]['username'] . "</p>";
-                ?>
+                $loginInfo = $_SESSION['loginInfo'][0];
+                // print_r($loginInfo);
+
+                echo "Welcome, ".$loginInfo['FirstName']." ".$loginInfo['LastName'];
+?>
+                
+                <p onclick='toggleNav()' class='settings-btn'><i ></i></p>
+                
                 <ul id="settings-dropdown" class="settings-content">
                     <li class="nav-item"><a href="profile.php">Edit Profile</a></li>
                     <li class="nav-item"><a href="logout.php">Logout</a></li>

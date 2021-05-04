@@ -38,7 +38,10 @@ class SqlConnection{
 			$q = $this->conn->prepare($query);
 			$success = $q->execute();
 			$results = $q->fetchAll(PDO::FETCH_ASSOC);
+
 			$q->closeCursor();
+			// print_r($results);
+			
 			return $results;	
 		} catch (PDOException $e) {
 			$results = $this->http_error("500 Internal Server Error\n\n"."There was a SQL error:\n\n" . $e->getMessage());
