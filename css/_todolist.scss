@@ -1,4 +1,33 @@
-add-task {
-  margin: auto;
+#add-task {
   padding: 5px;
+}
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+table {
+  border: none;
+}
+th {
+  border: none;
+}
+td {
+  border: none;
+  padding: 10px;
+  border-bottom: 1px solid #808080;
+}
+tr {
+  //Styles the rows
+  margin-bottom: 10px;
+}
+td.head {
+  //Styles the heading
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+td:nth-child(7) {
+  //Applies only to the Urgency Tab
+}
+table button {
+  border: none;
 }
