@@ -24,6 +24,7 @@ if (
 		echo "Couldn't create Account.";
 	} else { // successful name change
 		echo "Account " . $_POST["username"] . " created successfully!";
+		// header("Location: home.php");
 	}
 }
 
