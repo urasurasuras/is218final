@@ -138,6 +138,46 @@ input[type="submit"] {
   cursor: pointer;
 }
 
+#add-task {
+  padding: 5px;
+}
+
+.controls {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+table {
+  border: none;
+}
+
+th {
+  border: none;
+}
+
+td {
+  border: none;
+  padding: 10px;
+  border-bottom: 1px solid #808080;
+}
+
+tr {
+  margin-bottom: 10px;
+}
+
+td.head {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+table button {
+  border: none;
+}
+
 #profile {
   display: -webkit-box;
   display: -ms-flexbox;

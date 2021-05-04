@@ -1,25 +1,33 @@
-#task-creation {
-  display: none;
-  position: fixed;
-  width: 90%;
-  max-width: 720px;
-  margin: auto;
-  background-color: white;
-  text-align: center;
+#add-task {
+  padding: 5px;
 }
-
-#task-creation label {
-  display: block;
+.controls {
+  display: flex;
+  justify-content: space-between;
+}
+table {
+  border: none;
+}
+th {
+  border: none;
+}
+td {
+  border: none;
+  padding: 10px;
+  border-bottom: 1px solid #808080;
+}
+tr {
+  //Styles the rows
   margin-bottom: 10px;
 }
-input[type="submit"] {
-  display: block;
-  margin: 10px auto;
-}
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
+td.head {
+  //Styles the heading
+  font-size: 1.5rem;
   font-weight: bold;
-  cursor: pointer;
+}
+td:nth-child(7) {
+  //Applies only to the Urgency Tab
+}
+table button {
+  border: none;
 }
