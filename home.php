@@ -31,8 +31,10 @@ if (isset($_GET['sort'])){
             break;
     }
 }
-$sql .= " ORDER BY `due` DESC";
-
+else{
+    $sql .= " ORDER BY `due` DESC"; 
+}
+// echo $sql;
 $incompleteTasks = $conn->runQuery($sql);
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
@@ -68,10 +70,10 @@ $completeTasks = $conn->runQuery($sql);
             <form action="home.php">
                 <label for="sort">Sort by: </label>
                     <select name="sort" id="sort">
-                        <option value="ascending_date">Date (ascending)</option>
                         <option value="descending_date">Date (descending)</option>
-                        <option value="ascending_urgency">Urgency (ascending)</option>
+                        <option value="ascending_date">Date (ascending)</option>
                         <option value="descending_urgency">Urgency (descending)</option>
+                        <option value="ascending_urgency">Urgency (ascending)</option>
                     </select>
                 <br><br>
                 <input type="submit" value="Sort">
