@@ -9,14 +9,16 @@ include_once('header.php');
 require("connection.php");
 
 if (!isset($_SESSION['loginInfo'])) {
-    header("Location: login.html");
+    header("Location: loginForm.php");
 }
+$loginInfo = $_SESSION['loginInfo'][0];
+// print_r($loginInfo);
 
 $conn = new SqlConnection();
 $conn->connect();
 
 // Show incomplete tasks
-$sql = "SELECT * FROM `tasks` WHERE `completion`=0";
+$sql = "SELECT * FROM `tasks` WHERE `completion`=0 AND `username`='".$loginInfo['username']."'";
 
 if (isset($_GET['sort'])){
     switch ($_GET['sort']) {

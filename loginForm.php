@@ -29,13 +29,13 @@
 
 		<label for="firstName"><b>First Name</b></label>
 		<input type="text" placeholder="Enter First Name" name="firstName" required
-		pattern="[A-za-z]+">
+		>
 
 		<br>
 
 		<label for="lastName"><b>Last Name</b></label>
 		<input type="text" placeholder="Enter Last Name" name="lastName" required
-		pattern="[A-za-z]+">
+		>
 
 		<br>
 		
@@ -47,21 +47,39 @@
 		
 		<label for="password"><b>Password</b></label>
 		<input type="password" placeholder="Enter Password" name="password" required
-		pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,30}$">
+		>
 		<!-- https://stackoverflow.com/questions/19605150/regex-for-password-must-contain-at-least-eight-characters-at-least-one-number-a -->
 		
 	
 		<br>
 		
 		<label for="email"><b>E-mail</b></label>
-		<input type="email" placeholder="Enter E-mail" name="email" required
-		pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+		<input type="email" placeholder="Enter E-mail" name="email" required>
+		
 		<!-- https://www.w3schools.com/tags/att_input_pattern.asp -->
 
 		<br>
 		
 		<button type="submit">Register</button>
 
+		<?php
+			session_start();
+			// print_r($_SESSION);
+
+			if (!empty($_SESSION['message'])){
+				$messages = $_SESSION['message'];
+				// echo $_SESSION['message'][0];
+				// for ($i=0; $i < count($messages); $i++) { 
+				// 	echo $_SESSION['message'][$i];
+				// 	echo "<br>";
+				// }
+				foreach ($messages as $item) {
+					echo $item;
+					echo "<br>";
+				}
+			}
+			$_SESSION['message'] ="";
+		?>
 	</div>
 </form>
 </div>
