@@ -5,7 +5,7 @@ CREATE TABLE users (
     LastName varchar(255),
     FirstName varchar(255),
     PRIMARY KEY (username)
-)
+);
 
 CREATE TABLE tasks (
     ID int NOT NULL AUTO_INCREMENT,

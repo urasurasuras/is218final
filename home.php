@@ -17,6 +17,22 @@ $conn->connect();
 
 // Show incomplete tasks
 $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
+
+if (isset($_GET['sort'])){
+    switch ($_GET['sort']) {
+        case 'ascending_date':
+            $sql .= " ORDER BY `due` ASC";
+            break;
+        case 'descending_date':
+            $sql .= " ORDER BY `due` DESC";
+            break;
+        default:
+            $sql .= " ORDER BY `due` DESC";
+            break;
+    }
+}
+$sql .= " ORDER BY `due` DESC";
+
 $incompleteTasks = $conn->runQuery($sql);
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
@@ -49,23 +65,24 @@ $completeTasks = $conn->runQuery($sql);
     <div class="controls">
         <button id="add-task">Add Task</button>
         <div class="filter_by">
-            <label for="sort_by">Sort by: </label>
-            <select name="sort_by" id="sort_by">
-                <option value="">Date Ascending</option>
-                <option value="">Date Descending</option>
-                <option value="">Urgency</option>
-            </select>
+            <form action="home.php">
+                <label for="sort">Sort by: </label>
+                    <select name="sort" id="sort">
+                        <option value="ascending_date">Date (ascending)</option>
+                        <option value="descending_date">Date (descending)</option>
+                        <option value="ascending_urgency">Urgency (ascending)</option>
+                        <option value="descending_urgency">Urgency (descending)</option>
+                    </select>
+                <br><br>
+                <input type="submit" value="Sort">
+            </form>
         </div>
     </div>
     <?php @include_once 'taskContent.php'; ?>
 
     <?php
 
-    // Show incomplete tasks
-    // $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
-    // $results = $conn->runQuery($sql);
-
-    echo "<table class='stats' cellspacing='0'>";
+    echo "<table class='stats' id='incompleteTable' cellspacing='0'>";
     echo "<tr>
         <td class='head' colspan='8'>TO-DO Tasks</td>
           </tr>
@@ -184,6 +201,7 @@ $completeTasks = $conn->runQuery($sql);
 </main>
 
 <script src="js/scripts.js"></script>
+
 </body>
 
 </html>
