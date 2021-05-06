@@ -9,17 +9,36 @@ include_once('header.php');
 require("connection.php");
 
 if (!isset($_SESSION['loginInfo'])) {
-    header("Location: login.html");
+    header("Location: loginForm.php");
 }
+$loginInfo = $_SESSION['loginInfo'][0];
+// print_r($loginInfo);
 
 $conn = new SqlConnection();
 $conn->connect();
 
 // Show incomplete tasks
-$sql = "SELECT * FROM `tasks` WHERE `completion`=0";
+$sql = "SELECT * FROM `tasks` WHERE `completion`=0 AND `username`='".$loginInfo['username']."'";
+
+if (isset($_GET['sort_incomplete'])){
+    $sql = sortTable($sql, $_GET['sort_incomplete']);
+}
+else{
+    $sql .= " ORDER BY `due` DESC"; 
+}
 $incompleteTasks = $conn->runQuery($sql);
+// echo "sadsad ".$sql;
+// echo "<BR>";
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
+if (isset($_GET['sort_complete'])){
+    $sql = sortTable($sql, $_GET['sort_complete']);
+}
+else{
+    $sql .= " ORDER BY `due` DESC"; 
+}
+// echo "sadsad ".$sql;
+// echo "<BR>";
 $completeTasks = $conn->runQuery($sql);
 
 $sql= "SELECT `ID` FROM `tasks`";
@@ -49,30 +68,45 @@ $taskIDs=$conn->runQuery($sql);
 <main>
     <h2>My Tasks</h2>
     <hr>
-    <div class="controls">
-        <div class="buttons">
-            <button id="add-task" class="task_btn">Add Task</button>
-            <button id="edit-task" class="task_btn">Edit Task</button>
-        </div>
+        <div class="controls">
+            <button id="add-task">Add Task</button>
+            <div class="filter_by">
+                <form action="home.php">
+                    <label for="sort_incomplete">Sort TO-DO by: </label>
+                        <select name="sort_incomplete" id="sort_incomplete">
+                            <option value="descending_date">Date (descending)</option>
+                            <option value="ascending_date">Date (ascending)</option>
+                            <option value="descending_urgency">Urgency (descending)</option>
+                            <option value="ascending_urgency">Urgency (ascending)</option>
+                        </select>
+                    <br><br>
+                    <input type="submit" value="Sort">
+                </form>
+        </div>   
+        
         <div class="filter_by">
-            <label for="sort_by">Sort by: </label>
-            <select name="sort_by" id="sort_by">
-                <option value="">Date Ascending</option>
-                <option value="">Date Descending</option>
-                <option value="">Urgency</option>
-            </select>
+            <form action="home.php">
+                <label for="sort_complete">Sort complete by: </label>
+                    <select name="sort_complete" id="sort_complete">
+                        <option value="descending_date">Date (descending)</option>
+                        <option value="ascending_date">Date (ascending)</option>
+                        <option value="descending_urgency">Urgency (descending)</option>
+                        <option value="ascending_urgency">Urgency (ascending)</option>
+                    </select>
+                <br><br>
+                <input type="submit" value="Sort">
+            </form>
         </div>
+        
     </div>
+
+
     <?php @include_once 'taskContent.php'; ?>
     <?php @include_once 'editTaskContent.php'; ?>
 
     <?php
 
-    // Show incomplete tasks
-    // $sql = "SELECT * FROM `tasks` WHERE `completion`=0";
-    // $results = $conn->runQuery($sql);
-
-    echo "<table class='stats' cellspacing='0'>";
+    echo "<table class='stats' id='incompleteTable' cellspacing='0'>";
     echo "<tr>
         <td class='head' colspan='8'>TO-DO Tasks</td>
           </tr>
@@ -186,11 +220,33 @@ $taskIDs=$conn->runQuery($sql);
 
         $results = $conn->runQuery($sql);
     }
+
+    function sortTable($sql, $sortAction){
+        switch ($sortAction) {
+            case 'ascending_date':
+                $sql .= " ORDER BY `due` ASC";
+                break;
+            case 'descending_date':
+                $sql .= " ORDER BY `due` DESC";
+                break;
+            case 'descending_urgency':
+                $sql .= " ORDER BY `urgency` DESC";
+                break;
+            case 'ascending_urgency':
+                $sql .= " ORDER BY `urgency` ASC";
+                break;
+            default:
+                $sql .= " ORDER BY `due` DESC";
+                break;
+            }
+        return $sql;
+    }
     ?>
 
 </main>
 
 <script src="js/scripts.js"></script>
+
 </body>
 
 </html>
