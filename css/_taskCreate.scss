@@ -1,4 +1,5 @@
-#task-creation {
+#task-creation,
+#task-edit {
   display: none;
   position: fixed;
   width: 90%;
@@ -8,7 +9,8 @@
   text-align: center;
 }
 
-#task-creation label {
+#task-creation label,
+#task-edit label {
   display: block;
   margin-bottom: 10px;
 }
@@ -16,7 +18,7 @@ input[type="submit"] {
   display: block;
   margin: 10px auto;
 }
-.close {
+span.close {
   color: #aaa;
   float: right;
   font-size: 28px;

@@ -110,7 +110,8 @@ main {
   margin: 2% auto 0 auto;
 }
 
-#task-creation {
+#task-creation,
+#task-edit {
   display: none;
   position: fixed;
   width: 90%;
@@ -120,7 +121,8 @@ main {
   text-align: center;
 }
 
-#task-creation label {
+#task-creation label,
+#task-edit label {
   display: block;
   margin-bottom: 10px;
 }
@@ -130,7 +132,7 @@ input[type="submit"] {
   margin: 10px auto;
 }
 
-.close {
+span.close {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -138,8 +140,30 @@ input[type="submit"] {
   cursor: pointer;
 }
 
-#add-task {
-  padding: 5px;
+form.sort_by {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+form.sort_by label {
+  margin: auto 0;
+}
+
+#add-task,
+#edit-task {
+  padding: 3px;
+  margin: 3px;
+}
+
+span.task-count {
+  display: inline;
+  max-width: 980px;
+  margin: auto;
+}
+
+span.task-count p {
+  margin: 10px;
 }
 
 .controls {
