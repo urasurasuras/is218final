@@ -67,7 +67,9 @@ if (
 
 			echo "RESULT ARRAY: ";
 			print_r($result);
-			echo "Couldn't create Account.";
+			array_push($messages, "Couldn't create account, try another username.");
+
+			header("Location: loginForm.php");
 		} else { // successful name change
 			echo "Account " . $_POST["username"] . " created successfully!";
 			header("Location: home.php");

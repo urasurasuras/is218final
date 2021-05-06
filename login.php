@@ -15,6 +15,7 @@ else{
     $conn->connect();
     $loginInfo = $conn->doLogin($_POST["username"], $_POST["password"]);
     print_r($loginInfo);
+    $messages = array();
 
     if (!empty($loginInfo)){
 
@@ -26,7 +27,9 @@ else{
         header("Location: home.php");
     }
     else {
-        echo "Could not login, try again";
+        array_push($messages, "Could not login, try again");
+		$_SESSION['message'] = $messages;
+        header("Location: loginForm.php");
     }
 }
 // $userFound = $conn->findUserName($_GET["username"]);
