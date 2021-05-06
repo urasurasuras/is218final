@@ -46,9 +46,10 @@ window.onclick = function(event) {
     modal.style.display = "none";
   }
 }
+/*
 /*================================
  *Edit Task Toggle
- *===============================*/
+ *===============================
   // Get the modal
   var modal = document.getElementById("task-edit");
 
@@ -74,6 +75,7 @@ window.onclick = function(event) {
       modal.style.display = "none";
     }
   }
+  */
 /*==========================================
  * Code for Tabs
  *==========================================*/
