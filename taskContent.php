@@ -16,7 +16,7 @@
         <select name="urgency" id="urgency" required>
             <option value="Normal">Normal</option>
             <option value="Important">Important</option>
-            <option value="Very Important">Very Important</option>
+            <option value="Very-Important">Very Important</option>
         </select>
 
         <input type="submit" value="Add Task">
