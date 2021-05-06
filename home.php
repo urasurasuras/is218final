@@ -18,43 +18,40 @@ $conn = new SqlConnection();
 $conn->connect();
 
 // Show incomplete tasks
-$sql = "SELECT * FROM `tasks` WHERE `completion`=0 AND `username`='".$loginInfo['username']."'";
+$sql = "SELECT * FROM `tasks` WHERE `completion`=0 AND `username`='" . $loginInfo['username'] . "'";
 
-if (isset($_GET['sort_incomplete'])){
+if (isset($_GET['sort_incomplete'])) {
     $sql = sortTable($sql, $_GET['sort_incomplete']);
-}
-else{
-    $sql .= " ORDER BY `due` DESC"; 
+} else {
+    $sql .= " ORDER BY `due` DESC";
 }
 $incompleteTasks = $conn->runQuery($sql);
 // echo "sadsad ".$sql;
 // echo "<BR>";
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
-if (isset($_GET['sort_complete'])){
+if (isset($_GET['sort_complete'])) {
     $sql = sortTable($sql, $_GET['sort_complete']);
-}
-else{
-    $sql .= " ORDER BY `due` DESC"; 
+} else {
+    $sql .= " ORDER BY `due` DESC";
 }
 // echo "sadsad ".$sql;
 // echo "<BR>";
 $completeTasks = $conn->runQuery($sql);
 ?>
 
+<p>NOTE: Complete, incomplete, and delete task buttons are buggy so click them more than once</p>
 <div class="task-count">
-    <p>NOTE: Complete, incomplete, and delete task buttons are buggy so click them more than once</p>
-
-    <p>Incomplete:</p>
 
     <span>
+        <p>Tasks Incomplete:</p>
         <?php
         echo count($incompleteTasks);
         ?>
 
     </span>
     <span>
-        <p>Completed:</p>
+        <p>Tasks Completed:</p>
         <?php
         echo count($completeTasks);
         ?>
@@ -65,40 +62,44 @@ $completeTasks = $conn->runQuery($sql);
 <main>
     <h2>My Tasks</h2>
     <hr>
-        <div class="controls">
+    <div class="controls">
+        <div class="buttons">
             <button id="add-task">Add Task</button>
-            <div class="filter_by">
-                <form action="home.php">
-                    <label for="sort_incomplete">Sort TO-DO by: </label>
-                        <select name="sort_incomplete" id="sort_incomplete">
-                            <option value="descending_date">Date (descending)</option>
-                            <option value="ascending_date">Date (ascending)</option>
-                            <option value="descending_urgency">Urgency (descending)</option>
-                            <option value="ascending_urgency">Urgency (ascending)</option>
-                        </select>
-                    <br><br>
-                    <input type="submit" value="Sort">
-                </form>
-        </div>   
-        
+
+        </div>
         <div class="filter_by">
-            <form action="home.php">
-                <label for="sort_complete">Sort complete by: </label>
-                    <select name="sort_complete" id="sort_complete">
-                        <option value="descending_date">Date (descending)</option>
-                        <option value="ascending_date">Date (ascending)</option>
-                        <option value="descending_urgency">Urgency (descending)</option>
-                        <option value="ascending_urgency">Urgency (ascending)</option>
-                    </select>
+            <form class="sort_by" action="home.php">
+                <label for="sort_incomplete">Sort TO-DO by: </label>
+                <select name="sort_incomplete" id="sort_incomplete">
+                    <option value="descending_date">Date (descending)</option>
+                    <option value="ascending_date">Date (ascending)</option>
+                    <option value="descending_urgency">Urgency (descending)</option>
+                    <option value="ascending_urgency">Urgency (ascending)</option>
+                </select>
                 <br><br>
                 <input type="submit" value="Sort">
             </form>
         </div>
-        
+
+        <div class="filter_by">
+            <form class="sort_by" action="home.php">
+                <label for="sort_complete">Sort complete by: </label>
+                <select name="sort_complete" id="sort_complete">
+                    <option value="descending_date">Date (descending)</option>
+                    <option value="ascending_date">Date (ascending)</option>
+                    <option value="descending_urgency">Urgency (descending)</option>
+                    <option value="ascending_urgency">Urgency (ascending)</option>
+                </select>
+                <br><br>
+                <input type="submit" value="Sort">
+            </form>
+        </div>
+
     </div>
 
 
     <?php @include_once 'taskContent.php'; ?>
+    <?php @include_once 'EditTask.php'; ?>
 
     <?php
 
@@ -115,6 +116,7 @@ $completeTasks = $conn->runQuery($sql);
         <th>Due date</th>
         <th>Urgency</th>
         
+        <th></th>
         <th></th>
 
         </tr>";
@@ -138,6 +140,7 @@ $completeTasks = $conn->runQuery($sql);
         echo "<td>" . $row['urgency'] . "</td>";
 
         echo '<td><button class="btn" value="btnDeleteTask" name="btnDeleteTask"><i class="fa fa-trash"></i></button></td>';
+        echo '<td><button type="button" onclick="handleEdit(' . $row["title"], $row["description"], $row["due"], $row["urgency"] . ')" class="btn" value="btnEditTask" name="btnEditTask"><i class="fas fa-edit"></i></button></td>';
 
         echo "</form>";
         echo "</tr>";
@@ -158,6 +161,7 @@ $completeTasks = $conn->runQuery($sql);
         <th>Due date</th>
         <th>Urgency</th>
 
+        <th></th>
         <th></th>
 
         </tr>";
@@ -182,6 +186,7 @@ $completeTasks = $conn->runQuery($sql);
         echo "<td>" . $due . "<br>(" . $diff->d . "days, " . $diff->h . "hours.)</td>";
         echo "<td>" . $row['urgency'] . "</td>";
         echo '<td><button class="btn" value="btnDeleteTask" name="btnDeleteTask"><i class="fa fa-trash"></i></button></td>';
+        echo '<td><button type="button" onclick="document.getElementById(`task-edit`).style.display=`block`" class="btn" value="btnEditTask" name="btnEditTask"><i class="fas fa-edit"></i></button></td>';
 
         echo "</form>";
 
@@ -194,6 +199,7 @@ $completeTasks = $conn->runQuery($sql);
         unCompleteTask($conn);
     } else if (array_key_exists('btnDeleteTask', $_POST)) {
         deleteTask($conn);
+    } else if (array_key_exists('btnEditTask', $_POST)) {
     }
     function completeTask($conn)
     {
@@ -217,7 +223,8 @@ $completeTasks = $conn->runQuery($sql);
         $results = $conn->runQuery($sql);
     }
 
-    function sortTable($sql, $sortAction){
+    function sortTable($sql, $sortAction)
+    {
         switch ($sortAction) {
             case 'ascending_date':
                 $sql .= " ORDER BY `due` ASC";
@@ -234,7 +241,7 @@ $completeTasks = $conn->runQuery($sql);
             default:
                 $sql .= " ORDER BY `due` DESC";
                 break;
-            }
+        }
         return $sql;
     }
     ?>

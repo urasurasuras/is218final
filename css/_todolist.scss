@@ -1,5 +1,22 @@
-#add-task {
-  padding: 5px;
+form.sort_by {
+  display: flex;
+  label {
+    margin: auto 0;
+  }
+}
+
+#add-task,
+#edit-task {
+  padding: 3px;
+  margin: 3px;
+}
+span.task-count {
+  display: inline;
+  max-width: 980px;
+  margin: auto;
+  p {
+    margin: 10px;
+  }
 }
 .controls {
   display: flex;
