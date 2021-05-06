@@ -102,18 +102,15 @@ function openTab(evt, tabName) {
 /*==========================================
  * Display Edit
  *==========================================*/
-function handleEdit(title,description,due_date,urgency){
-  console.log(title);
-  var btn=document.getElementById('task-edit').style.display='block';
-  var formTitle=document.getElementById('title');
-  formTitle.value="";
-  var description=document.getElementById('description');
+function handleEdit(taskID){
+  // console.log(taskID);
+
+  document.getElementById('taskID').value = taskID;
+
+  console.log( document.getElementById('taskID').value );
   
-  var due_date=document.getElementById('due');
 
-  var urgency=document.getElementById('urgency');
-
-
+  var btn=document.getElementById('task-edit').style.display='block';
 
 
 }

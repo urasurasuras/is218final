@@ -19,6 +19,8 @@
             <option value="Very-Important">Very Important</option>
         </select>
 
+        <input hidden value="createTask" name="action_type" id="action_type" ></input>
+
         <input type="submit" value="Add Task">
     </form>
 </div>

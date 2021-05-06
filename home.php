@@ -98,7 +98,7 @@ $completeTasks = $conn->runQuery($sql);
     </div>
 
 
-    <?php @include_once 'taskContent.php'; ?>
+    <?php @include_once 'CreateTask.php'; ?>
     <?php @include_once 'EditTask.php'; ?>
 
     <?php
@@ -140,7 +140,10 @@ $completeTasks = $conn->runQuery($sql);
         echo "<td>" . $row['urgency'] . "</td>";
 
         echo '<td><button class="btn" value="btnDeleteTask" name="btnDeleteTask"><i class="fa fa-trash"></i></button></td>';
-        echo '<td><button type="button" onclick="handleEdit(' . $row["title"] . ',' . $row["description"] . ',' . $row["due"] . ',' . $row["urgency"] . ')" class="btn" value="btnEditTask" name="btnEditTask"><i class="fas fa-edit"></i></button></td>';
+        echo '<td><button type="button" 
+        onclick="handleEdit(
+            \'' . $row['ID'] . '\'
+            )" class="btn" value="btnEditTask" name="btnEditTask"><i class="fas fa-edit"></i></button></td>';
 
         echo "</form>";
         echo "</tr>";

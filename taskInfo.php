@@ -15,24 +15,51 @@ $conn->connect();
 
 if (isset($_POST)) {
 
-    echo "Task urgency from form: ".$urgency;
-    echo "<br>";
-    $task = new Task($loginInfo['username'], $title, $description, $due, $urgency);
+    switch ($_POST['action_type']) {
 
-    echo "Task urgency from obj: ".$task->urgency;
-    echo "<br>";
+        case 'createTask':
 
-    $results = $conn->createTask($task);
-    if (!empty($result)) { // Null result from runQuery, assume duplicate username
-
-        echo "RESULT ARRAY: ";
-        print_r($result);
-        echo "Couldn't create task.";
-    } else { // successful Task addition
-        echo "Task for " . $loginInfo['username'] . " created successfully!";
+            $task = new Task($loginInfo['username'], $title, $description, $due, $urgency);
         
-        // header("Location: home.php");
+            $results = $conn->createTask($task);
+            if (!empty($result)) { // Null result from runQuery, assume duplicate username
+        
+                echo "RESULT ARRAY: ";
+                print_r($result);
+                echo "Couldn't create task.";
+            } else { // successful Task addition
+                echo "Task for " . $loginInfo['username'] . " created successfully!";
+                
+                header("Location: home.php");
+            }
+            
+        break;
+
+        case 'editTask':
+                $ID = $_POST['taskID'];
+                
+                $task = new Task($loginInfo['username'], $title, $description, $due, $urgency, $ID);
+
+                $results = $conn->editTask($task);
+                if (!empty($result)) { 
+
+                    echo "RESULT ARRAY: ";
+                    print_r($result);
+                    echo "Couldn't edit task.";
+                } else { // successful Task addition
+                    echo "Task for " . $loginInfo['username'] . " edited successfully!";
+
+                    header("Location: home.php");
+                }
+                
+                break;
+        default:
+            echo "Bruh moment for task form submission";
+            break;
     }
+
+    // print_r($_POST);
+    
 }
 
 // Close connection
