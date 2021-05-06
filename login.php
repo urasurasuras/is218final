@@ -34,4 +34,4 @@ else{
 
 ?>
 
-<p><a href="login.html"> Go back to Login Page </a> </p> <!-- kinda wanna do this in a way that it goes back to the login page but says the error -->
+<p><a href="loginForm.php"> Go back to Login Page </a> </p> <!-- kinda wanna do this in a way that it goes back to the login page but says the error -->
