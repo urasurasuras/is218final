@@ -27,8 +27,8 @@ else{
     $sql .= " ORDER BY `due` DESC"; 
 }
 $incompleteTasks = $conn->runQuery($sql);
-echo "sadsad ".$sql;
-echo "<BR>";
+// echo "sadsad ".$sql;
+// echo "<BR>";
 
 $sql = "SELECT * FROM `tasks` WHERE `completion`=1";
 if (isset($_GET['sort_complete'])){
@@ -37,8 +37,8 @@ if (isset($_GET['sort_complete'])){
 else{
     $sql .= " ORDER BY `due` DESC"; 
 }
-echo "sadsad ".$sql;
-echo "<BR>";
+// echo "sadsad ".$sql;
+// echo "<BR>";
 $completeTasks = $conn->runQuery($sql);
 ?>
 
