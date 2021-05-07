@@ -169,3 +169,4 @@ class SqlConnection{
 		return $message;
 	}
 }
+?>
