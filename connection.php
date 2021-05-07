@@ -142,13 +142,12 @@ class SqlConnection{
 	function createTask($task){
 		$sql = "INSERT into `tasks`
 				(`username`, `title`, `description`, `due`, `urgency`, `completion`)
-				VALUES ('$task->username', '$task->title', '$task->description', '$task->due', '$task->urgency', '$task->completion')";
+				VALUES ('$task->username', '$task->title', '$task->description', '$task->due', '$task->urgency', '0')";
 
 		$results = $this->runQuery($sql);
 
 		return $results;
 	}
-
 	function editTask($task){
 		$sql = "UPDATE `tasks` 
 				SET `title`='".$task->title."',

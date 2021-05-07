@@ -72,6 +72,31 @@ if (
 			header("Location: loginForm.php");
 		} else { // successful name change
 			echo "Account " . $_POST["username"] . " created successfully!";
+			array_push($messages, "NO SQL result.");
+			$_SESSION['message'] = $messages;
+			
+			
+			$loginInfo = $conn->doLogin($user->username, $user->password);
+			print_r($loginInfo);
+			$messages = array();
+
+			if (!empty($loginInfo)){
+
+				echo "Logged in as: ";
+				$_SESSION['loginInfo'] = $loginInfo;
+				// $_SESSION['loggedIn'] = $loggedIn;
+
+				// if we logged in, proceed to home
+				header("Location: home.php");
+			}
+			else {
+				array_push($messages, "Could not login, try again");
+				$_SESSION['message'] = $messages;
+				header("Location: loginForm.php");
+			}
+			
+			
+			
 			header("Location: home.php");
 		}
 	}
