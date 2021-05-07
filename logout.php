@@ -1,6 +1,8 @@
 <?php
     session_start();
     session_destroy();
-
-	header("Location: loginForm.php");
+    
+    
+    echo "<p><a href='loginForm.php'> You have been logged out. Go to Login Page </a> </p>"
+    
 ?>
